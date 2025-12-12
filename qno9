@@ -1,0 +1,57 @@
+#include <iostream>
+#include <vector>
+#include <algorithm> 
+using namespace std;
+void reverseVector(vector<int> &v) {
+    int left = 0, right = v.size() - 1;
+    while (left < right) {
+        swap(v[left], v[right]);
+        left++;
+        right--;
+    }
+}
+int main() {
+    vector<int> vec = {10, 20, 30, 40, 50};
+
+    cout << "Traditional for loop: ";
+    for (int i = 0; i < vec.size(); i++) {
+        cout << vec[i] << " ";
+    }
+    cout << endl;
+    cout << "Range-based for loop: ";
+    for (int x : vec) {
+        cout << x << " ";
+    }
+    cout << endl << endl;
+    int N;
+    cout << "Enter number of elements: ";
+    cin >> N;
+    vector<int> userVec(N);
+    cout << "Enter " << N << " integers:\n";
+    for (int i = 0; i < N; i++) {
+        cin >> userVec[i];
+    }
+    int minimum = userVec[0];
+    int maximum = userVec[0];
+
+    for (int x : userVec) {
+        if (x < minimum) minimum = x;
+        if (x > maximum) maximum = x;
+    }
+
+    cout << "Minimum = " << minimum << endl;
+    cout << "Maximum = " << maximum << endl << endl;
+    cout << "Reversed vector: ";
+    for (int x : userVec) {
+        cout << x << " ";
+    }
+    cout << endl << endl;
+    cout << "Enter number to count: ";
+    cin >> target;
+    int count = 0;
+    for (int x : userVec) {
+        if (x == target) count++;
+    }
+    cout << "Occurrences of " << target << " = " << count << endl;
+    return 0;
+}
