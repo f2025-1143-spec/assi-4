@@ -1,0 +1,74 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+const int MAXR = 100;
+const int MAXC = 100;
+
+bool isLetter(char c) {
+    return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');
+}
+
+int main() {
+    int R, C;
+    char grid[MAXR][MAXC];
+
+    cout << "Enter rows and columns: ";
+    cin >> R >> C;
+
+    cout << "Enter crossword grid (letters or #):\n";
+    for (int i = 0; i < R; i++) {
+        for (int j = 0; j < C; j++) {
+            cin >> grid[i][j];
+}
+}
+    int horizontalCount = 0;
+    int verticalCount = 0;
+    string longestWord = "";   
+    for (int i = 0; i < R; i++) {
+        string word = "";
+        for (int j = 0; j < C; j++) {
+            if (isLetter(grid[i][j])) {
+                word += grid[i][j];
+            } else {
+                if (word.length() >= 3) {
+                    horizontalCount++;
+                    if (word.length() > longestWord.length())
+                        longestWord = word;
+                }
+                word = "";
+            }
+        }
+        // check at end of row
+        if (word.length() >= 3) {
+            horizontalCount++;
+            if (word.length() > longestWord.length())
+                longestWord = word;
+        }
+    }
+    for (int j = 0; j < C; j++) {
+        string word = "";
+        for (int i = 0; i < R; i++) {
+            if (isLetter(grid[i][j])) {
+                word += grid[i][j];
+            } else {
+                if (word.length() >= 3) {
+                    verticalCount++;
+                    if (word.length() > longestWord.length())
+                        longestWord = word;
+                }
+                word = "";
+            }
+        }
+        if (word.length() >= 3) {
+            verticalCount++;
+            if (word.length() > longestWord.length())
+                longestWord = word;
+        }
+    }
+    cout << "Horizontal words: " << horizontalCount << endl;
+    cout << "Vertical words:   " << verticalCount << endl;
+    cout << "Longest word:     " << longestWord << endl;
+
+    return 0;
+}
