@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int m, n;
+    cin >> m >> n;
+
+    int arr[100][100];   
+    int rot[100][100];      
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            cin >> arr[i][j];
+        }
+    }
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            rot[n - 1 - j][i] = arr[i][j];
+        }
+    }
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            cout << rot[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
