@@ -1,0 +1,43 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class MyVector {
+    int *arr;
+    int cap;
+    int len;
+public:
+    MyVector() {
+        cap = 2;
+        len = 0;
+        arr = new int[cap];
+    }
+    ~MyVector() {
+        delete[] arr;
+    }
+    void push_back(int x) {
+        if (len == cap) {
+            cap *= 2;
+            int *temp = new int[cap];
+            for (int i = 0; i < len; i++) temp[i] = arr[i];
+            delete[] arr;
+            arr = temp;
+        }
+        arr[len++] = x;
+    }
+    void pop_back() {
+        if (len > 0) len--;
+    }
+    int size() {
+        return len;
+    }
+    int operator[](int i) {
+        return arr[i];
+    }
+};
+
+int main() {
+    int n;
+    cin >> n;
+
+    vector<vector<int>> mat(n, vecto
