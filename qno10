@@ -1,0 +1,59 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+void removeEven(vector<int> &v) {
+    vector<int> temp;
+    for (int x : v) {
+        if (x % 2 != 0)     // keep odd numbers
+            temp.push_back(x);
+    }
+    v = temp;   // assign back
+}
+int findMissing(const vector<int> &a, const vector<int> &b) {
+    int sumA = 0, sumB = 0;
+    for (int x : a) sumA += x;
+    for (int x : b) sumB += x;
+    return sumA - sumB;  // difference is missing element
+}
+bool hasDuplicates(vector<int> v) {
+    sort(v.begin(), v.end());
+    for (int i = 1; i < v.size(); i++) {
+        if (v[i] == v[i-1])
+            return true;
+    }
+    return false;
+}
+int countPairsWithSum(const vector<int> &v, int target) {
+    int count = 0;
+    for (int i = 0; i < v.size(); i++) {
+        for (int j = i + 1; j < v.size(); j++) {
+            if (v[i] + v[j] == target)
+                count++;
+        }
+    }
+    return count;
+}
+
+int main() {
+    vector<int> v1 = {10, 15, 22, 33, 44, 55, 60};
+    removeEven(v1);
+    cout << "Vector after removing evens: ";
+    for (int x : v1) cout << x << " ";
+    cout << endl << endl;
+    vector<int> A = {5, 7, 9, 11, 15};
+    vector<int> B = {7, 9, 11, 15};  // 5 is missing
+    cout << "Missing element: " << findMissing(A, B) << endl << endl;
+    vector<int> v2 = {4, 7, 1, 9, 7};
+    if (hasDuplicates(v2))
+        cout << "Duplicates found!" << endl;
+    else
+        cout << "No duplicates." << endl;
+    cout << endl;
+    vector<int> v3 = {1, 5, 7, -1, 5};
+    int target = 6;
+    cout << "Number of pairs with sum " << target << ": "
+         << countPairsWithSum(v3, target) << endl;
+    return 0;
+}
+
