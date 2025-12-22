@@ -1,0 +1,52 @@
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+struct Employee {
+    string name;
+    int age;
+    vector<string> skills;
+};
+
+int main() {
+    int n;
+    cout << "Enter number of employees: ";
+    cin >> n;
+
+    vector<Employee> employees(n);
+
+    for (int i = 0; i < n; i++) {
+        cout << "\nEmployee " << i + 1 << endl;
+
+        cout << "Name: ";
+        cin >> employees[i].name;
+
+        cout << "Age: ";
+        cin >> employees[i].age;
+
+        int skillCount;
+        cout << "Number of skills: ";
+        cin >> skillCount;
+
+        employees[i].skills.resize(skillCount);
+        for (int j = 0; j < skillCount; j++) {
+            cout << "Skill " << j + 1 << ": ";
+            cin >> employees[i].skills[j];
+        }
+    }
+
+    cout << "\n--- Employee Details ---\n";
+    for (const auto& emp : employees) {
+        cout << "Name: " << emp.name << endl;
+        cout << "Age: " << emp.age << endl;
+        cout << "Skills: ";
+        for (const auto& skill : emp.skills) {
+            cout << skill << " ";
+        }
+        cout << "\n\n";
+    }
+
+    return 0;
+}
